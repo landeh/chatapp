@@ -4,9 +4,9 @@
 
 
 .App {
-  background: #fffbd5;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #b20a2c, #fffbd5);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #b20a2c, #fffbd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #1D2B64;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #F8CDDA, #1D2B64);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #F8CDDA, #1D2B64); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   height: 100vh;
 
@@ -18,7 +18,7 @@
   font-size: 60px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: black;
   padding: 20px 32 px;
   text-align: left;
   border-bottom: 2px solid white;
@@ -39,20 +39,37 @@
 }
 
 .text-input input{
-  width: calc(100% - 50px);
+  position: absolute;
+  bottom: 3px;
+  right: 2px;
+  left: 5px;
+  width: calc(100% - 10px);
   height: 90%;
   font-size: 20px;
+  border-radius:15px;
+  border: 1px solid white;
+  background:black;
+  color:white
 }
 
 .text-input button{
-  width: 50px;
-  height: 100%;
-  border-radius: 20px;
+  position: absolute;
+  bottom: 10 px;
+  right: 8px;
+  width: 30px;
+  height: 80%;
+  border-radius:15px;
+  border: 1px solid black;
   cursor: pointer;
 }
 
 .text-input button:hover{
-  background: red;
+  background: #F8CDDA;
   color: black;
+}
+
+.arrow{
+  postion: absolute;
+  height: 10px;
 }
 
