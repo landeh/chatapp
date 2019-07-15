@@ -8,6 +8,7 @@ import Camera from 'react-snap-pic'
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage"
+
 class App extends React.Component {
 
   state = {
@@ -16,7 +17,6 @@ class App extends React.Component {
     editName:false,
     showCamera:false
   } 
-  }
   receive = (m) => {
     const messages = [m, ...this.state.messages]
     messages.sort((a, b) => b.ts - a.ts)
@@ -36,6 +36,7 @@ class App extends React.Component {
     if (name) {
       this.setState({ name })
     }
+  
 
     firebase.initializeApp({
       apiKey: "AIzaSyBadYFvEVY3FBLZFqtDTILV_35m8lFLVto",
@@ -97,12 +98,14 @@ class App extends React.Component {
   takePicture = (img) => {
     console.log(img)
     this.setState({showCamera:false})
+  }
 }
+
 export default App;
 
 function Message(props) {
   var { m, name} = props
-  return (<div key={i} className="bubble-wrap"
+  return (<div className="bubble-wrap"
     from={m.from === name ? "me" : "you"}>
     {m.from !== name && <div className="bubble-name">{m.from}</div>}
     <div className="bubble">

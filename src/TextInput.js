@@ -1,7 +1,6 @@
 import React from 'react'
 import arrow from './arrow.png'
-import { FiSend, FiArrowRight } from "react-icons/fi";
-import { FiSend, FiCamera } from 'react-icons/fi'
+import { FiSend, FiArrowRight, FiCamera } from "react-icons/fi";
 
 class TextInput extends React.Component {
 
