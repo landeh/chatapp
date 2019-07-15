@@ -30,53 +30,59 @@
 }
 
 .text-input{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-  border-top: 2px solid white;
-  display: flex;
+  position:absolute;
+  bottom:0;
+  height:40px;
+  width:100%;
+  border-top:2px solid white;
+  display:flex;
   align-items: center;
 }
-
-.text-input input{
-  position: absolute;
-  bottom: 3px;
-  left: 5px;
-  width: calc(100% - 10px);
-  height: 90%;
-  font-size: 15px;
-  border-radius:15px;
-  border: 1px solid white;
-  background:black;
-  color:white
+/* comment */
+.text-input > input {
+  width:calc(100% - 50px);
+  height:31px;
+  color:white;
+  border:1px solid white;
+  border-radius:14px;
+  position:absolute;
+  right:5px;
+  background:#1f1e2e;
+  padding-left:12px;
+  padding-bottom:2px;
+  padding-right:28px;
+  font-size:16px;
+  outline:none;
 }
-
-.text-input button{
-  position: absolute;
-  bottom: 10 px;
-  right: 8px;
-  width: 30px;
-  height: 80%;
-  border-radius:15px;
-  border: 1px solid black;
+.text-input > button {
+  position:absolute;
+  top:6px;
+  right:7px;
+  border-radius:100%;
+  width:27px;
+  height:27px;
+  border:1px solid white;
+  background:white;
+  padding: 5px 2px;
   cursor: pointer;
+  outline:none;
 }
-
-.text-input button:hover{
-  background: #F8CDDA;
-  color: black;
+.text-input > button:hover {
+  color:white;
+  background:teal;
 }
-
-.text-input button[disabled]{
+.text-input > button[disabled] {
   color:white;
   background:grey;
-  cursor: default;
+  cursor:default;
 }
 
-.arrow{
-  postion: absolute;
-  height: 10px;
+.messages{
+  display: flex;
+  overflow:auto;
+  height:calc(100% - 132px);
+  padding-top:10px;
+  flex-direction: column-reverse;
 }
 
 .bubble-wrap{
@@ -85,7 +91,6 @@
   display:flex;
   position: relative;
 }
-
 .bubble-wrap[from="me"] {
   flex-direction:row-reverse;
 }
@@ -93,10 +98,9 @@
   border-radius:11px;
   padding: 8px 12px;
   font-size: 14px;
-  position: relative;
-  right: 40px;
+  position:relative;
   border: 1px solid #606060;
-  margin-top: 15px;
+  margin-left:5px;
 }
 .bubble:before{
   content:"";
@@ -110,7 +114,7 @@
   top:10px
 }
 .bubble-wrap[from="me"] .bubble:before{
-  left: 40px;
+  left:auto;
   right:-6px;
 }
 .bubble:after{
@@ -127,22 +131,12 @@
 }
 .bubble-name{
   position: absolute;
-  color: white;
+  color:black;
   top: -5px;
   font-size:10px;
   left: 30px;
 }
 
-.messages{
-  overflow:auto;
-  height: calc(100% - 128px)
-
-}
-.UserName{
-  position: relative;
-  top: 0px;
-  font-size: 10px;
-}
 .edit-username{
   display: flex;
   align-items: center;
