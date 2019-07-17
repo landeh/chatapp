@@ -1,6 +1,6 @@
 import React from 'react'
 import arrow from './arrow.png'
-import { FiSend, FiArrowRight, FiCamera } from "react-icons/fi";
+import {FiArrowRight, FiCamera } from "react-icons/fi";
 
 class TextInput extends React.Component {
 
@@ -24,13 +24,15 @@ class TextInput extends React.Component {
         return (<div className="text-input">
             <button onClick={this.props.showCamera}
                 style={{ left: 10, right: 'auto' }}>
-                <FiCamera style={{ height: 15, width: 15 }} />
+                <FiCamera style={{ height: 15, width: 15 }}/>
             </button>
+            
             <input value={text}
                 placeholder="Write your message here..."
                 onChange={e => this.setState({ text: e.target.value })}
                 onKeyPress={this.keyPress}
             />
+
             <button disabled={!text}
                 onClick={this.send}>
                 <FiArrowRight style={{ height: 15, width: 15 }} />

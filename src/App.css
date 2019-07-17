@@ -16,7 +16,7 @@
   display:flex;
   align-items: center;
   justify-content:space-between;
-  font-size: 60px;
+  font-size: 3rem;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background: rgba(255, 255, 255, 0.2);
   color: black;
@@ -26,11 +26,12 @@
 }
 
 .logo{
-  height: 80px;
+  height: 42px;
+  margin-right: 1.5rem;
 }
 
 .text-input{
-  position:absolute;
+  position:fixed;
   bottom:0;
   height:40px;
   width:100%;
@@ -80,7 +81,7 @@
 .messages{
   display: flex;
   overflow:auto;
-  height:calc(100% - 132px);
+  height:calc(100% - 90px);
   padding-top:10px;
   flex-direction: column-reverse;
 }
@@ -90,6 +91,7 @@
   padding:8px 20px;
   display:flex;
   position: relative;
+  flex-shrink: 0;
 }
 .bubble-wrap[from="me"] {
   flex-direction:row-reverse;
@@ -127,6 +129,11 @@
 .bubble > span {
   color:white;
   position:relative;
+  z-index:101;
+}
+
+.bubble img{
+  position: relative;
   z-index:101;
 }
 .bubble-name{

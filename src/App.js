@@ -8,15 +8,16 @@ import Camera from 'react-snap-pic'
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage"
+import Div100vh from 'react-div-100vh'
 
 class App extends React.Component {
 
   state = {
-    messages:[],
-    name:'',
-    editName:false,
-    showCamera:false
-  } 
+    messages: [],
+    name: '',
+    editName: false,
+    showCamera: false
+  }
   receive = (m) => {
     const messages = [m, ...this.state.messages]
     messages.sort((a, b) => b.ts - a.ts)
@@ -36,7 +37,7 @@ class App extends React.Component {
     if (name) {
       this.setState({ name })
     }
-  
+
 
     firebase.initializeApp({
       apiKey: "AIzaSyBadYFvEVY3FBLZFqtDTILV_35m8lFLVto",
@@ -52,10 +53,23 @@ class App extends React.Component {
       snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
           //console.log(change.doc.data())
-          this.receive(change.doc.data())
+          this.receive({
+            ...change.doc.data(),
+            id: change.doc.id
+          })
+        }
+
+        if (change.type === 'removed') {
+          this.remove(change.doc.id)
         }
       })
     })
+  }
+
+  remove = (id) => {
+    var msgs = [...this.state.messages]
+    var messages = msgs.filter(m => m.id !== id)
+    this.setState({ messages })
   }
 
   setEditName = (editName) => {
@@ -69,12 +83,12 @@ class App extends React.Component {
   render() {
     var { editName, messages, name } = this.state
     return (
-      <div className="App">
+      <Div100vh className="App">
         <header className="header">
-          <div>
+          <div style={{ display: 'flex', alignItems: 'chatter' }}>
             <img src={logo} className="logo" />
-            Chatter
-        </div>
+            {editName ? ' ' : 'Chatter'}
+          </div>
           <NamePicker
             name={name}
             editName={editName}
@@ -84,32 +98,47 @@ class App extends React.Component {
         </header>
         <main className="messages">
           {messages.map((m, i) => {
-            return <Message key={i} m={m} name={name} />
+            return <Message key={i} m={m} name={name}
+              onClick={() => {
+                if (name === m.from) {
+                  this.db.collection('messages').doc(m.id).delete()
+                }
+              }
+              }
+            />
           })}
         </main>
-        <TextInput sendMessage={text => this.send({ text })} 
-          showCamera={()=>this.setState({showCamera:true})}
+        <TextInput sendMessage={text => this.send({ text })}
+          showCamera={() => this.setState({ showCamera: true })}
         />
-        />
-      </div>
+        {this.state.showCamera && <Camera takePicture={this.takePicture} />}
+      </Div100vh>
     );
   }
 
-  takePicture = (img) => {
-    console.log(img)
-    this.setState({showCamera:false})
+  takePicture = async (img) => {
+    this.setState({ showCamera: false })
+    const imgID = Math.random().toString(36).substring(7);
+    var storageRef = firebase.storage().ref();
+    var ref = storageRef.child(imgID + '.jpg');
+    await ref.putString(img, 'data_url')
+    this.send({ img: imgID })
   }
 }
 
 export default App;
+const bucket = 'https://firebasestorage.googleapis.com/v0/b/chatter-app-ef157.appspot.com/o/'
+const suffix = '.jpg?alt=media'
 
 function Message(props) {
-  var { m, name} = props
+  var { m, name, onClick } = props
   return (<div className="bubble-wrap"
-    from={m.from === name ? "me" : "you"}>
+    from={m.from === name ? "me" : "you"}
+    onClick={onClick}>
     {m.from !== name && <div className="bubble-name">{m.from}</div>}
     <div className="bubble">
       <span> {m.text}</span>
+      {m.img && <img alt="pic" src={bucket + m.img + suffix} />}
     </div>
   </div>)
 }
